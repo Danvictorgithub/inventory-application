@@ -13,21 +13,6 @@ body {
   height: 100%;
 }
 
-.container .row {
-  border: 1px dotted #0313fc;
-}
-
-.container .row.header {
-  flex: 0 1 auto;
-}
-
-.container .row.content {
-  flex: 1 1 auto;
-}
-
-.container .row.footer {
-  flex: 0 1 40px;
-}
 .mainHero {
   /* background-image: url(../images/mainHeroImage.jpeg); */
   background-image:
@@ -74,4 +59,72 @@ body {
   align-items: center;
   margin:1%;
   padding: 2% 1.4%;
+}
+
+.mLogo {
+  border-bottom: 4px solid #D22E2E;
+}
+.container .header {
+  flex: 0 1 auto;
+  display: flex;
+  flex-direction: row;
+  height: 100px;
+  justify-content: space-around;
+  align-items: center;
+}
+.container .header ul {
+  display:flex;
+}
+.container .header ul li{
+  list-style-type: none;
+  margin-left: 10px;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.container .content {
+  flex: 1 1 auto;
+}
+.container .footer {
+  flex: 0 1 75px;
+  background-color: #141414;
+}
+.catalogueHeader {
+  height: 70px;
+  background-color: #F5F5F5;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 1.2% 2%;
+  font-size: 1.2rem;
+}
+.catalogueContent {
+  display:grid;
+  grid-template-columns: 1fr 2.8fr;
+  height: 100%;
+}
+.catalogueSideBar {
+  padding: 8%;
+}
+.catalogueSideBar h3 {
+  padding-bottom: 48px;
+}
+.catalogueSideBar ul li {
+  list-style-type: none;
+  padding-bottom: 10px;
+  font-weight:500;
+}
+.catalogueSideBar ul li:hover {
+  font-weight: 800;
+}
+.catalogueItems {
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4%;
+  padding-right: 4%;
+}
+.catalogueItems > * {
+  border: 2px solid black;
+  height: 350px;
+  
 }
