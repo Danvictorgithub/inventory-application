@@ -60,7 +60,10 @@ body {
   margin:1%;
   padding: 2% 1.4%;
 }
-
+.showcaseItem h3 {
+  font-size: 1.5rem;
+  font-weight: 300;
+}
 .mLogo {
   border-bottom: 4px solid #D22E2E;
 }
