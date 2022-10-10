@@ -6,14 +6,16 @@ exports.get_car_info = (req,res,next) => {
         carsInfo(callback) {
             Cars.findById(req.params.carid).exec(callback);
         }
-
-    },(err, results)=>{
+    },(err, results) =>{
+        console.log(results.carsInfo);
         if (err) {
-            return next(err);
-          }
-        if (results.carsInfo.length == 0) {
-            const err = new Error("Car not found");
-            err.status = 404;
+            if (results.carsInfo == null) {
+                // No results.
+                const err = new Error("Car not found");
+                err.status = 404;
+                err.stack = "ID doesn't exist in the Database";
+                return next(err);
+            }
             return next(err);
         }
         res.end("Hey it exist");
