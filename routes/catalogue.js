@@ -9,7 +9,19 @@ router.get('/', (req, res, next) => {
     res.render("cataloguehome");
 });
 router.get('/shop', (req,res,next) => {
-	res.render("catalogueshop");
+	res.render("catalogueshop",{searchQuery:"All"});
 });
+router.get('/shop/brands', (req,res,next) => {
+	res.render("catalogueshop",{searchQuery:"Brands"});
+});
+
+router.get('/shop/cars', (req,res,next) => {
+	res.render("catalogueshop",{searchQuery:"Cars"});
+});
+
+router.get('/shop/cartypes', (req,res,next) => {
+	res.render("catalogueshop",{searchQuery:"Car Types"});
+});
+
 
 module.exports = router;

@@ -323,4 +323,7 @@ div.wrapper.group h3 {
   background-position: center;
   background-size: cover;
 }
-
+.searchQuery {
+  color: #454545;
+  font-weight: 800;
+}
