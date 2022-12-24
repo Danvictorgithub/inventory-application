@@ -1,12 +1,17 @@
+//- title
+//- brandsCount
+//- carsCount
+//- cartypesCount
 extends layout
 
 block content
   div.container
     div.mainHero
-      h5 Best Car Brands at your Reach
-      h1 Welcome to 
-        span.fRed= title
-      h4 The Car Business, where latest vehicles are available to any parts of the world.
+      h3 Best Car Brands at your Reach
+      div.titleGroup
+        h1 Welcome To
+        h1.fRed=title
+      p The Car Business, where latest vehicles are available to any parts of the world.
       a(href='/catalogue')
         button.heroButton Check Now!
     div.showcase

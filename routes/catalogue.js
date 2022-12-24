@@ -1,25 +1,15 @@
 const express = require('express');
 const router = express.Router();
-
-const Cars = require('../models/cars');
 const async = require('async');
+const Brand = require("../models/brand");
+const Car = require("../models/car");
+const CarType = require("../models/cartype");
 
 router.get('/', (req, res, next) => {
-    res.render('carscatalogue', {title: "Cars Catalogue"});
+    res.render("cataloguehome");
 });
-router.get('/', (req,res, next) => {
-    async.parallel({
-        cars(callback) {
-            Cars.find({}).exec(callback);
-        },
-        carsCount(callback) {
-            Cars.countDocuments({}).exec(callback);
-        }
-    },(err, results)=> {
-        if (err) {
-            return next(err);
-        }
-    });
-})
+router.get('/shop', (req,res,next) => {
+	res.render("catalogueshop");
+});
 
 module.exports = router;
