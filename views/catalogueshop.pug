@@ -2,17 +2,29 @@ extends cataloguelayout
 
 block container
     div.catalogueHeader
-        h2 All 
+        div.wrapper
+            h2 All 
     div.catalogueContent
-        div.catalogueSideBar
-            h3 CATEGORIES 
-            ul
-                li Brands
-                li Cars
-                li Car Type
-        div.catalogueItems
-            //- div.catalogueItem
-                //- a(href='/cars/carID')
-                //-     img(src='images/bmwm3gtr.jpg', alt="some picture")
-                //- h3 BMW M3 
-                //- p The BMW M3 is a high-performance version of the BMW 3 Series, developed by BMW's in-house motorsport division.
+        div.wrapper
+            div.catalogueSideBar
+                h3 CATEGORIES 
+                ul
+                    li Brands
+                    li Cars
+                    li Car Type
+            div.catalogueItems
+                div.catalogueItem
+                    a(href='/cars/carID')
+                        img(src='/images/bmwm3gtr.jpg', alt="some picture")
+                    h3 BMW M3 
+                    p The BMW M3 is a high-performance version of the BMW 3 Series, developed by BMW's in-house motorsport division.
+                div.catalogueItem
+                    a(href='/cars/carID')
+                        img(src='/images/bmwm3gtr.jpg', alt="some picture")
+                    h3 BMW M3 
+                    p The BMW M3 is a high-performance version of the BMW 3 Series, developed by BMW's in-house motorsport division.
+                div.catalogueItem
+                    a(href='/cars/carID')
+                        img(src='/images/bmwm3gtr.jpg', alt="some picture")
+                    h3 BMW M3 
+                    p The BMW M3 is a high-performance version of the BMW 3 Series, developed by BMW's in-house motorsport division.

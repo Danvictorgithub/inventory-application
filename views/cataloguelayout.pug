@@ -3,14 +3,16 @@ extends layout
 block content
     div.container
         div.container.header
-            h1.mLogo 
-                a(href="/") Car Shop
-            ul
-                li 
-                    a(href="/catalogue") Home
-                li 
-                    a(href="/catalogue/shop") Shop
-                li About
-        div.container.content
+            div.wrapper
+                h1.mLogo 
+                    a(href="/") Car Shop
+                ul
+                    li 
+                        a(href="/catalogue") Home
+                    li 
+                        a(href="/catalogue/shop") Shop
+                    li About
+        div.container.content 
             block container
         div.container.footer
+            h2 Made By DanVictorGitHug
