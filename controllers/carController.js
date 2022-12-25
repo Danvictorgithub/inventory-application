@@ -1,5 +1,7 @@
 const Car = require("../models/car");
+const CarType = require("../models/cartype");
 const {body, validationResult} = require("express-validator"); //For sanitizing forms
+const async = require("async");
 
 const multer = require('multer'); // File Upload API configuration
 const storage = multer.diskStorage({
@@ -22,12 +24,28 @@ const upload = multer({storage:storage,fileFilter: (req, file, cb) => {
   }, limits: { fileSize: 2000000 }}); // limit imgage upload to 2MB
 const Brand = require("../models/brand");
 exports.car_create_get = (req,res,next) => {
-	Brand.find().exec((err,results) => {
-		if (err) {
-			return next(err);
-		}
-		res.render("car_form", {brands:results});
+	async.parallel(
+		{
+			brands(callback) {
+				Brand.find(callback);
+			},
+			car_types(callback) {
+				CarType.find(callback);
+			}
+		},
+		(err,results)=>{
+			if (err) {
+				return next(err);
+			}
+			res.render("car_form", {brands:results.brands, car_types:results.car_types});
 		});
+
+	// Brand.find().exec((err,results) => {
+	// 	if (err) {
+	// 		return next(err);
+	// 	}
+	// 	res.render("car_form", {brands:results});
+	// 	});
 	};
 
 exports.car_create_post = [
@@ -47,12 +65,21 @@ exports.car_create_post = [
 			img:req.file.filename
 		});
 		if (!errors.isEmpty()) {
-			Brand.find().exec((err,results) => {
+			async.parallel(
+			{
+				brands(callback) {
+					Brand.find(callback);
+				},
+				car_types(callback) {
+					CarType.find(callback);
+				}
+			},
+			(err,results)=>{
 				if (err) {
 					return next(err);
 				}
-				res.render("car_form", {brands:results,errors:errors.array()});
-				});
+				res.render("car_form", {brands:results.brands, car_types:results.car_types});
+			});
 			return;
 		}
 		car.save((err)=> {
@@ -64,3 +91,15 @@ exports.car_create_post = [
 		console.log("Success");
 	}
 ];
+exports.car_catalog_info = (req,res,next) => {
+	async.parallel(
+		{
+			brands(callback) {
+				Brand.find(callback);
+			},
+			car_types(callback) {
+				CarType.find(callback);
+			}
+		},
+		(err,results)=>{});
+}
