@@ -327,3 +327,9 @@ div.wrapper.group h3 {
   color: #454545;
   font-weight: 800;
 }
+.autoPadding {
+  padding: 0 6vw;
+}
+.fullWidth {
+  width: 100%;
+}

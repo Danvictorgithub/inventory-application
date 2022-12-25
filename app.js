@@ -6,6 +6,8 @@ var logger = require('morgan');
 const helmet = require("helmet");
 const compression = require("compression");
 
+// const bodyParser = require("body-parser");
+
 const mongoose = require('mongoose');
 const mongoDB = "mongodb+srv://dan:dan123@cluster0.qwgwoxz.mongodb.net/inventory-application?retryWrites=true&w=majority";
 mongoose.connect(mongoDB, { useNewUrlParser:true, useUnifiedTopology:true});
@@ -22,7 +24,7 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
-
+// app.use(bodyParser.urlencoded({extended: true}));
 app.use(helmet());
 app.use(logger('dev'));
 app.use(express.json());

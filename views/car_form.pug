@@ -1,0 +1,31 @@
+extends cataloguelayout
+
+block container
+	div.carForm
+		div.wrapper
+			form(action="" method="post" enctype="multipart/form-data")
+				div.autoPadding
+					label(for="name") Car Name:
+					input(type="text" id="name" name="name" required="true" placeholder="Car Name" value=(car === undefined ? '':car.name))
+				div.autoPadding
+					label(for="brand" id="brand") Brand:
+					select(name="brand")
+						for brand in brands
+							option(value=brand.id) #{brand.name}
+				div.autoPadding
+					label(for="car_type") Car Type:
+					input(type="text" id="car_type" name="car_type" required="true" placeholder="Car Type" value=(car === undefined ? '':car.car_type))
+				div.autoPadding
+					label(for="name") Car Description:
+					br
+					textarea(rows="5" cols="25" type="textarea" name="description" value=(car === undefined ? '': car.description))
+				div.autoPadding
+					input(type="file" name="img")
+				div.autoPadding
+					button(type="submit") Submit
+	if errors
+		div.wrapper
+			div.autoPadding
+				ul
+					for error in errors
+						li=error.msg
