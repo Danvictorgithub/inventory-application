@@ -1,6 +1,7 @@
 const Car = require                     ("../models/car");
 const CarType = require                 ("../models/cartype");
 const Brand = require                   ("../models/brand");
+const CarInstance = require             ("../models/carinstance");
 const {body, validationResult} = require("express-validator"); //For sanitizing forms
 const async = require                   ("async");
 const multer = require                  ('multer');
@@ -143,5 +144,29 @@ exports.car_catalog_info_sort_by_car = (req,res,next) => {
 				return next(err);
 			}
 			res.render("catalogueshop",{searchQuery:"Car",cars:results.cars});
+		});
+};
+// Car Details Controllers
+exports.car_catalog_details = (req, res, next) => {
+	async.parallel(
+		{
+			car(callback) {
+				Car.findById(req.params.id).populate("brand").populate("car_type").exec(callback);
+			},
+			carinstance(callback) {
+				CarInstance.findOne({car:req.params.id}).exec(callback);
+			}
+		},
+		(err,results) => {
+			if (err) {
+			return next(err);
+			}
+			if (results.car === null) {
+				const err = new Error("Car Not Found");
+				err.status = 404;
+				return next(err);
+			}
+			console.log(results.carinstance)
+			res.render("car_details",{car:results.car, carinstance:results.carinstance});
 		});
 };
