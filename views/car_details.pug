@@ -1,0 +1,24 @@
+extends cataloguelayout
+
+block container
+
+	div.carDetails
+		div.carDetailsHeader
+			div.wrapper
+				h1 Car Details
+		div.carDetailsContent
+			div.wrapper
+				div.carDetailsContentGrid.autoPadding
+					div.leftContent
+						img(src=car.imgurl)
+					div.rightContent
+						h1 #{car.brand.name} #{car.name}
+						h2=car.car_type.name
+						p=car.description
+						if carinstance
+							h3 #{carinstance.status}
+						else
+							h3 Auctioned
+
+
+

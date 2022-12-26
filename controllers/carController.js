@@ -166,7 +166,6 @@ exports.car_catalog_details = (req, res, next) => {
 				err.status = 404;
 				return next(err);
 			}
-			console.log(results.carinstance)
 			res.render("car_details",{car:results.car, carinstance:results.carinstance});
 		});
 };
