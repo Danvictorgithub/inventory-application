@@ -108,7 +108,7 @@ exports.car_catalog_info_sort_by_brand = (req,res,next) => {
 	async.parallel(
 		{
 			cars(callback) {
-				Car.find().populate("brand").populate("car_type").sort("brand").exec(callback);
+				Car.find().populate("brand").populate("car_type").sort({"brand":-1}).exec(callback);
 			},
 		},
 		(err,results)=>{
