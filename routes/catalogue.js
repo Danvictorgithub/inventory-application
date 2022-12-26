@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const carController = require("../controllers/carController");
 const carinstanceController = require("../controllers/carinstanceController");
+const brandController = require("../controllers/brandController");
 // Home Routes
 router.get('/', (req, res, next) => {
     res.render("cataloguehome");
@@ -9,6 +10,8 @@ router.get('/', (req, res, next) => {
 // Brands Route
 router.get('/shop', carController.car_catalog_info);
 router.get('/shop/brands', carController.car_catalog_info_sort_by_brand);
+router.get('/shop/brand/create',brandController.brand_create_get);
+router.post('/shop/brand/create',brandController.brand_create_post);
 // Cars Route
 router.get('/shop/cars', carController.car_catalog_info_sort_by_car);
 router.get('/shop/car/create',carController.car_create_get);

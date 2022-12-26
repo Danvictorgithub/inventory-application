@@ -242,10 +242,10 @@ a {
   text-align: center;
 }
 .containerHomeHero-desc h2 {
-  font-size: 3vw;
+  font-size: 2rem;
 }
 .containerHomeHero-desc p {
-  font-size: 2vw;
+  font-size: 1.5rem;
   margin-top: 24px;
 }
 @media (max-width:600px) {

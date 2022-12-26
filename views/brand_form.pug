@@ -1,0 +1,17 @@
+extends cataloguelayout
+
+block container
+	div.carForm
+		div.wrapper
+			form(action="" method="post")
+				div.autoPadding
+					label(for="name") Brand Name:
+					input(type="text" id="name" name="name" required="true" placeholder="Brand Name" value=(brand === undefined ? '':brand.name))
+				div.autoPadding
+					button(type="submit") Submit
+	if errors
+		div.wrapper
+			div.autoPadding
+				ul
+					for error in errors
+						li=error.msg
