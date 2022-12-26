@@ -1,19 +1,22 @@
-const Car = require("../models/car");
-const CarType = require("../models/cartype");
+const Car = require                     ("../models/car");
+const CarType = require                 ("../models/cartype");
+const Brand = require                   ("../models/brand");
 const {body, validationResult} = require("express-validator"); //For sanitizing forms
-const async = require("async");
+const async = require                   ("async");
+const multer = require                  ('multer');
 
-const multer = require('multer'); // File Upload API configuration
+// File Upload API configuration
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'public/images/carImages');
   },
   filename: function (req, file, cb) {
   	const fileExtention = file.originalname.split('.')[1];
-    const fileName = `${Math.round(Math.random() * 1E9)}.${fileExtention}`;
+    const fileName = `${Math.round(Math.random() * 1E9)}.${fileExtention}`; //Randomize filename to avoid same-name errors
 	cb(null,fileName);
   }
 });
+// Filters to Image Only
 const upload = multer({storage:storage,fileFilter: (req, file, cb) => {
     if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
       cb(null, true);
@@ -22,7 +25,7 @@ const upload = multer({storage:storage,fileFilter: (req, file, cb) => {
       return cb(new Error('Only .png, .jpg and .jpeg format allowed!'));
     }
   }, limits: { fileSize: 2000000 }}); // limit imgage upload to 2MB
-const Brand = require("../models/brand");
+
 exports.car_create_get = (req,res,next) => {
 	async.parallel(
 		{
@@ -39,15 +42,8 @@ exports.car_create_get = (req,res,next) => {
 			}
 			res.render("car_form", {brands:results.brands, car_types:results.car_types});
 		});
-
-	// Brand.find().exec((err,results) => {
-	// 	if (err) {
-	// 		return next(err);
-	// 	}
-	// 	res.render("car_form", {brands:results});
-	// 	});
-	};
-
+};
+// Car Form Sanitazion
 exports.car_create_post = [
 	upload.single('img'),
 	body("name","Name is required").trim().isLength({min:1}).escape(),
@@ -55,7 +51,7 @@ exports.car_create_post = [
 	body("car_type","Car Type is required").trim().isLength({min:1}).escape(),
 	body("description","Description is Invalid").optional({ checkFalsy: true }).trim().escape(),
 	(req,res, next) => {
-		console.log(req.body,req.file);
+		// console.log(req.body,req.file);
 		const errors = validationResult(req);
 		const car = new Car({
 			name:req.body.name,
@@ -88,9 +84,11 @@ exports.car_create_post = [
 			}
 			res.redirect(car.url);
 		});
-		console.log("Success");
+		// console.log("Success");
 	}
 ];
+
+// Catalogue Filters
 exports.car_catalog_info = (req,res,next) => {
 	async.parallel(
 		{

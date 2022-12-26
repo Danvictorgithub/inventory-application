@@ -4,7 +4,7 @@ const async = require("async");
 const Brand = require("../models/brand");
 const Car = require("../models/car");
 const CarType = require("../models/cartype");
-/* GET home page. */
+/* GET Main page. */
 router.get('/', function(req, res, next) {
   async.parallel(
         {
