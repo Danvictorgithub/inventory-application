@@ -94,12 +94,42 @@ exports.car_create_post = [
 exports.car_catalog_info = (req,res,next) => {
 	async.parallel(
 		{
-			brands(callback) {
-				Brand.find(callback);
+			cars(callback) {
+				Car.find().populate("brand").populate("car_type").exec(callback);
 			},
-			car_types(callback) {
-				CarType.find(callback);
-			}
 		},
-		(err,results)=>{});
-}
+		(err,results)=>{
+			if (err) {
+				return next(err);
+			}
+			res.render("catalogueshop",{searchQuery:"Car",cars:results.cars});
+		});
+};
+exports.car_catalog_info_sort_by_brand = (req,res,next) => {
+	async.parallel(
+		{
+			cars(callback) {
+				Car.find().populate("brand").populate("car_type").sort("brand").exec(callback);
+			},
+		},
+		(err,results)=>{
+			if (err) {
+				return next(err);
+			}
+			res.render("catalogueshop",{searchQuery:"Car",cars:results.cars});
+		});
+};
+exports.car_catalog_info_sort_by_car_type = (req,res,next) => {
+	async.parallel(
+		{
+			cars(callback) {
+				Car.find().populate("brand").populate("car_type").sort("car_type").exec(callback);
+			},
+		},
+		(err,results)=>{
+			if (err) {
+				return next(err);
+			}
+			res.render("catalogueshop",{searchQuery:"Car",cars:results.cars});
+		});
+};

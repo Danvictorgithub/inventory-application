@@ -10,24 +10,22 @@ block container
                 h3 CATEGORIES 
                 ul
                     li 
-                        a(href="brands") Brands
+                        a(href="/catalogue/shop/brands") Brands
                     li 
-                        a(href="cars") Cars
+                        a(href="/catalogue/shop/cars") Cars
                     li 
-                        a(href="cartypes") Car Type
+                        a(href="/catalogue/shop/cartypes") Car Type
             div.catalogueItems
-                div.catalogueItem
-                    a(href='/catalogue/shop/car/carID')
-                        img(src='/images/bmwm3gtr.jpg', alt="some picture")
-                    h3 BMW M3 
-                    p The BMW M3 is a high-performance version of the BMW 3 Series, developed by BMW's in-house motorsport division.
-                div.catalogueItem
-                    a(href='/catalogue/shop/car/carID')
-                        img(src='/images/bmwm3gtr.jpg', alt="some picture")
-                    h3 BMW M3 
-                    p The BMW M3 is a high-performance version of the BMW 3 Series, developed by BMW's in-house motorsport division.
-                div.catalogueItem
-                    a(href='/catalogue/shop/car/carID')
-                        img(src='/images/bmwm3gtr.jpg', alt="some picture")
-                    h3 BMW M3 
-                    p The BMW M3 is a high-performance version of the BMW 3 Series, developed by BMW's in-house motorsport division.
+                if (cars != undefined)
+                    for car in cars
+                        div.catalogueItem
+                            a(href=car.url)
+                                img(src= car.imgurl)
+                            h3 #{car.brand.name} #{car.name}
+                            h3=car.car_type.name
+                            p #{car.description}
+                //- div.catalogueItem
+                    //- a(href='/catalogue/shop/car/carID')
+                    //-     img(src='/images/bmwm3gtr.jpg', alt="some picture")
+                    //- h3 car brand BMW M3 car.name
+                    //- p The BMW M3 is a high-performance version of the BMW 3 Series, developed by BMW's in-house motorsport division. car.description
