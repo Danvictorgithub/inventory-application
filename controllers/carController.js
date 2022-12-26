@@ -102,7 +102,7 @@ exports.car_catalog_info = (req,res,next) => {
 			if (err) {
 				return next(err);
 			}
-			res.render("catalogueshop",{searchQuery:"Car",cars:results.cars});
+			res.render("catalogueshop",{searchQuery:"All",cars:results.cars});
 		});
 };
 exports.car_catalog_info_sort_by_brand = (req,res,next) => {
@@ -124,6 +124,20 @@ exports.car_catalog_info_sort_by_car_type = (req,res,next) => {
 		{
 			cars(callback) {
 				Car.find().populate("brand").populate("car_type").sort("car_type").exec(callback);
+			},
+		},
+		(err,results)=>{
+			if (err) {
+				return next(err);
+			}
+			res.render("catalogueshop",{searchQuery:"Car Type",cars:results.cars});
+		});
+};
+exports.car_catalog_info_sort_by_car = (req,res,next) => {
+	async.parallel(
+		{
+			cars(callback) {
+				Car.find().populate("brand").populate("car_type").sort("name").exec(callback);
 			},
 		},
 		(err,results)=>{

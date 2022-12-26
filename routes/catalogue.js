@@ -5,12 +5,10 @@ const carController = require("../controllers/carController");
 router.get('/', (req, res, next) => {
     res.render("cataloguehome");
 });
-router.get('/shop', (req,res,next) => {
-	res.render("catalogueshop",{searchQuery:"All",car:""});
-});
+router.get('/shop', carController.car_catalog_info);
 router.get('/shop/brands', carController.car_catalog_info_sort_by_brand);
 
-router.get('/shop/cars', carController.car_catalog_info);
+router.get('/shop/cars', carController.car_catalog_info_sort_by_car);
 router.get('/shop/car/create',carController.car_create_get);
 router.post('/shop/car/create',carController.car_create_post);
 router.get('/shop/car/:id', (req,res,next) => {
