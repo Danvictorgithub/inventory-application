@@ -98,6 +98,7 @@ exports.car_catalog_info = (req,res,next) => {
 			},
 		},
 		(err,results)=>{
+			console.log(results.cars);
 			if (err) {
 				return next(err);
 			}
@@ -108,7 +109,7 @@ exports.car_catalog_info_sort_by_brand = (req,res,next) => {
 	async.parallel(
 		{
 			cars(callback) {
-				Car.find().populate("brand").populate("car_type").sort({"brand":-1}).exec(callback);
+				Car.find().populate("brand").populate("car_type").sort({"brand":1}).exec(callback);
 			},
 		},
 		(err,results)=>{
@@ -122,7 +123,7 @@ exports.car_catalog_info_sort_by_car_type = (req,res,next) => {
 	async.parallel(
 		{
 			cars(callback) {
-				Car.find().populate("brand").populate("car_type").sort("car_type").exec(callback);
+				Car.find().populate("brand").populate("car_type").sort({"car_type":-1}).exec(callback);
 			},
 		},
 		(err,results)=>{
@@ -136,7 +137,7 @@ exports.car_catalog_info_sort_by_car = (req,res,next) => {
 	async.parallel(
 		{
 			cars(callback) {
-				Car.find().populate("brand").populate("car_type").sort("name").exec(callback);
+				Car.find().populate("brand").populate("car_type").sort({"name":-1}).exec(callback);
 			},
 		},
 		(err,results)=>{
@@ -161,7 +162,7 @@ exports.car_catalog_details = (req, res, next) => {
 			if (err) {
 			return next(err);
 			}
-			if (results.car === null) {
+			if (results.car == null) {
 				const err = new Error("Car Not Found");
 				err.status = 404;
 				return next(err);
