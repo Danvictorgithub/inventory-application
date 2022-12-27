@@ -1,0 +1,16 @@
+extends cataloguelayout
+
+block container
+	div.detail_gen
+		div.wrapper
+			div.autoPadding.content
+				h1=brand.name
+				a(href=`${brand.url}/delete`) Delete
+				br
+				a(href=`${brand.url}/update`) Update
+			//- form(action="" method="post")
+			//- 	input(type="none" value=brand._id)
+			//- 	button(type="submit") Delete
+			//- form(action="" method="post")
+			//- 	input(type="none" value=brand._id)
+			//- 	button(type="submit") Update

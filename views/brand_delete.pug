@@ -1,0 +1,20 @@
+extends cataloguelayout
+
+block container
+	div.detail_gen
+		div.wrapper
+			div.autoPadding.content
+				h1=brand.name
+				if (cars.length > 0)
+					p Please Delete the Following Cars:
+						ul
+							for car in cars
+								li 
+									a(href=car.dburl)=car.name
+				else
+					form(action="" method="post")
+						input(type="hidden" value=brand._id)
+						button(type="submit") Delete
+			//- form(action="" method="post")
+			//- 	input(type="none" value=brand._id)
+			//- 	button(type="submit") Update

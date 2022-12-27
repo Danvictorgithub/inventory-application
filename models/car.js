@@ -14,4 +14,7 @@ CarSchema.virtual("url").get(function() {
 CarSchema.virtual("imgurl").get(function() {
     return `/images/carImages/${this.img}`;
 });
+CarSchema.virtual("dburl").get(function() {
+    return `/catalogue/database/car/${this._id}`;
+});
 module.exports = mongoose.model('Car', CarSchema);

@@ -1,0 +1,21 @@
+extends cataloguelayout
+
+block container
+	div.detail_gen
+		div.wrapper
+			div.autoPadding.content
+				h1 Delete: #{car.name}
+				if (carinstances.length > 0)
+					p Please Delete the Following Car Instances:
+						ul.deleteList
+							for carinstance in carinstances
+								li 
+									a(href=carinstance.url) 
+										i #{car.brand.name} #{car.name}-#{carinstance.status}
+				else
+					form(action="" method="post")
+						input(type="hidden" name="carid" value=car._id)
+						button.formDelete(type="submit") Delete
+			//- form(action="" method="post")
+			//- 	input(type="none" value=brand._id)
+			//- 	button(type="submit") Update

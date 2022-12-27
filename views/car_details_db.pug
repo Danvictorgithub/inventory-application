@@ -1,0 +1,15 @@
+extends cataloguelayout
+
+block container
+	div.detail_gen
+		div.wrapper
+			div.autoPadding.content
+				h1 Car Name:#{car.name}
+				h1 Brand: #{car.brand.name}
+				h1 Car Type: #{car.car_type.name}
+				h2 description: #{car.description}
+				img.dbImage(src=car.imgurl)
+
+				a(href=`${car.dburl}/delete`) Delete
+				br
+				a(href=`${car.dburl}/update`) Update

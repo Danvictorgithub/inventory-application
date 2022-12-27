@@ -5,12 +5,12 @@ block container
 		div.wrapper
 			form(action="" method="post")
 				div.autoPadding
-					label(for="car" id="car") Brand:
+					label(for="car" id="car") Car:
 					select(name="car")
 						for car in cars
 							option(value=car.id) #{car.brand.name} #{car.name}
 				div.autoPadding
-					label(for="status" id="status") Car Type:
+					label(for="status" id="status") Status:
 					select(name="status")
 						for status in ["Available","Out of Stock","Available-SecondHand"]
 							option(value=status)=status

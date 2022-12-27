@@ -394,3 +394,39 @@ div.wrapper.group h3 {
   background-color: #F5F5F5;
   color: #454545;
 }
+.lists {
+  list-style-type: square;
+}
+.lists li {
+  margin-bottom:12px;
+  font-size: 2rem;
+}
+div.autoPadding.content > * {
+}
+div.autoPadding.content a {
+/*  max-width:100px;*/
+  display:block;
+  border: 2px solid black;
+  padding: 12px 24px;
+}
+.deleteList li {
+  width: 200px;
+  border: 1px solid #F5F5F5;
+}
+.formDelete {
+  display:block;
+  border: 2px solid black;
+  padding: 12px 24px;
+  background-color: white;
+}
+.dbImage {
+  max-width: 400px;
+}
+.createButton {
+  margin: 8px 0;
+  padding:12px 24px;
+  border: 1px solid black;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: white;
+}

@@ -11,17 +11,26 @@ block container
 					label(for="brand" id="brand") Brand:
 					select(name="brand")
 						for brand in brands
-							option(value=brand.id) #{brand.name}
+							if brand.selected == true
+								option(value=brand.id selected) #{brand.name}
+							else
+								option(value=brand.id) #{brand.name}
 				div.autoPadding
 					label(for="car_type" id="car_type") Car Type:
 					select(name="car_type")
 						for car_type in car_types
-							option(value=car_type.id) #{car_type.name}
+							if car_type.selected == true
+								option(value=car_type.id selected) #{car_type.name}
+							else
+								option(value=car_type.id) #{car_type.name}
 				div.autoPadding
 					label(for="name") Car Description:
 					br
-					textarea(rows="5" cols="25" type="textarea" name="description" value=(car === undefined ? '': car.description))
+					textarea(rows="5" cols="25" type="textarea" name="description" ) #{car === undefined ? '': car.description}
 				div.autoPadding
+					if car
+						img.dbImage(src=car.imgurl)
+						br
 					input(type="file" name="img")
 				div.autoPadding
 					button(type="submit") Submit
