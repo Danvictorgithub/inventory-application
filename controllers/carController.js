@@ -163,10 +163,122 @@ exports.car_catalog_details = (req, res, next) => {
 			return next(err);
 			}
 			if (results.car == null) {
-				const err = new Error("Car Not Found");
+				const err = new Error(`Car ID: ${req.params.id} Not Found`);
 				err.status = 404;
 				return next(err);
 			}
 			res.render("car_details",{car:results.car, carinstance:results.carinstance});
 		});
 };
+
+exports.car_list = (req,res,next) => {
+	Car.find().populate("brand").exec((err,cars)=> {
+		if (err) {
+			return next(err);
+		}
+		res.render("car_list",{cars});
+	});
+};
+exports.car_details = (req,res,next) => {
+	Car.findById(req.params.id).populate("brand").populate("car_type").exec((err,car)=> {
+		if (err) {
+			return next(err);
+		}
+		if (car == null) {
+			const err = new Error(`Car ID: ${req.params.id} Not Found`);
+				err.status = 404;
+				return next(err);
+		}
+		res.render("car_details_db",{car});
+	});
+};
+exports.car_delete_get = (req,res, next) => {
+	async.parallel(
+		{
+			car(callback) {
+				Car.findById(req.params.id).populate("brand").exec(callback);
+			},
+			carinstances(callback) {
+				CarInstance.find({car:req.params.id}).exec(callback);
+			}
+		},(err,results)=>{
+			if (err) {
+				return next(err);
+			}
+			if (results.car == null) {
+				const err = new Error(`Car ID: ${req.params.id} Not Found`);
+				err.status = 404;
+				return next(err);
+			}
+			res.render("car_delete",{car:results.car,carinstances:results.carinstances});
+		});
+};
+exports.car_delete_post = (req,res,next) =>{
+	async.parallel(
+		{
+			car(callback) {
+				Car.findById(req.body.carid).populate("brand").exec(callback);
+			},
+			carinstances(callback) {
+				CarInstance.find({car:req.body.carid}).exec(callback);
+			}
+		},
+		(err,results)=>{
+			if (err) {
+				return next(err);
+			}
+			if (results.car == null) {
+				const err = new Error(`Car ID: ${req.params.id} Not Found`);
+				err.status = 404;
+				return next(err);
+			}
+			if (results.carinstances.length > 0) {
+				res.render("car_delete",{car:results.car,carinstances:results.carinstances});
+				return;
+			}
+			Car.findByIdAndDelete(req.body.carid,(err) => {
+				if (err) {
+					return next(err);
+				}
+				res.redirect("/catalogue/database/cars");
+			});
+		});
+};
+exports.car_update_get = (req,res,next) => {
+	async.parallel(
+		{
+			car(callback) {
+				Car.findById(req.params.id).populate("brand").populate("car_type").exec(callback);
+			},
+			brands(callback) {
+				Brand.find(callback);
+			},
+			car_types(callback){
+				CarType.find(callback);
+			}
+		},
+		(err,results)=>{
+			if (err) {
+				return next(err);
+			}
+			if (results.car == null) {
+				const err = new Error(`Car ID: ${req.params.id} Not Found`);
+				err.status = 404;
+				return next(err);
+			}
+			// Selects Brand on <select> by default
+			results.brands.forEach((brand) => {
+				if (brand._id.toString() == results.car.brand._id.toString()) {
+					brand.selected = true;
+				}
+			});
+			results.car_types.forEach((car_type) => {
+				if (car_type._id.toString() == results.car.car_type._id.toString()) {
+					car_type.selected = true;
+				}
+			});
+			console.log(results.brands);
+			res.render("car_form",{car:results.car,brands:results.brands,car_types:results.car_types});
+		});
+};
+exports.car_update_post = (req,res,next) =>{};
