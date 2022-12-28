@@ -425,7 +425,7 @@ div.autoPadding.content a {
 .createButton {
   margin: 8px 0;
   padding:12px 24px;
-  border: 1px solid black;
+  border: 4px solid black;
   font-size: 1rem;
   font-weight: bold;
   background-color: white;

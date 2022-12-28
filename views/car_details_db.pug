@@ -8,6 +8,7 @@ block container
 				h1 Brand: #{car.brand.name}
 				h1 Car Type: #{car.car_type.name}
 				h2 description: #{car.description}
+				p #{car.img}
 				img.dbImage(src=car.imgurl)
 
 				a(href=`${car.dburl}/delete`) Delete

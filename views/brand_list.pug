@@ -3,9 +3,10 @@ extends cataloguelayout
 block container
 	div.databaselist
 		div.wrapper
-			h1 Brand Database
-			button.createButton
-				a(href="./brand/create") Create Brand
+			div.autoPadding
+				h1 Brand Database
+				button.createButton
+					a(href="./brand/create") Create Brand
 			ul.lists.autoPadding
 				for brand in brands
 					li.autoPadding

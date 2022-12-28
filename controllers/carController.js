@@ -5,7 +5,7 @@ const CarInstance = require             ("../models/carinstance");
 const {body, validationResult} = require("express-validator"); //For sanitizing forms
 const async = require                   ("async");
 const multer = require                  ('multer');
-
+const fs = require                      ('fs');
 // File Upload API configuration
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -272,13 +272,95 @@ exports.car_update_get = (req,res,next) => {
 					brand.selected = true;
 				}
 			});
+			// Selects Car Types <select> by default
 			results.car_types.forEach((car_type) => {
 				if (car_type._id.toString() == results.car.car_type._id.toString()) {
 					car_type.selected = true;
 				}
 			});
-			console.log(results.brands);
+			// console.log(results.brands);
 			res.render("car_form",{car:results.car,brands:results.brands,car_types:results.car_types});
 		});
 };
-exports.car_update_post = (req,res,next) =>{};
+exports.car_update_post = [
+	// (req,res,next) => {
+	// 	const content = "Some Content";
+	// 	fs.unlink("./public/images/carimages/someetxt.txt", err => {
+	// 		if (err) {
+	// 			return next(err);
+	// 		}
+	// 		console.log("deletion success");
+	// 	});
+	// }
+	upload.single('img'),
+	body("name").trim().isLength({min:1}).withMessage("Name is required").isLength({max:15}).withMessage("Name exceeded 15 character limit").escape(),
+	body("brand").trim().isLength({min:1}).withMessage("Brand is required").isLength({max:174}).withMessage("Description reached 175 max characters").escape(),
+	body("car_type","Car Type is required").trim().isLength({min:1}).escape(),
+	body("description","Description is Invalid").optional({ checkFalsy: true }).trim().escape(),
+	(req,res, next) => {
+		// console.log(req.body,req.file);
+		const errors = validationResult(req);
+		const car = new Car({
+			name:req.body.name,
+			brand:req.body.brand,
+			car_type: req.body.car_type,
+			description: req.body.description,
+			img:req.file.filename,
+			_id:req.params.id
+		});
+		if (!errors.isEmpty()) {
+			async.parallel(
+				{
+					car(callback) {
+						Car.findById(req.params.id).populate("brand").populate("car_type").exec(callback);
+					},
+					brands(callback) {
+						Brand.find(callback);
+					},
+					car_types(callback){
+						CarType.find(callback);
+					}
+				},
+				(err,results)=>{
+					if (err) {
+						return next(err);
+					}
+					// Selects Brand on <select> by default
+					results.brands.forEach((brand) => {
+						if (brand._id.toString() == results.car.brand._id.toString()) {
+							brand.selected = true;
+						}
+					});
+					// Selects Car Types on <select> by default
+					results.car_types.forEach((car_type) => {
+						if (car_type._id.toString() == results.car.car_type._id.toString()) {
+							car_type.selected = true;
+						}
+					});
+					// console.log(results.brands);
+					res.render("car_form",{car:results.car,brands:results.brands,car_types:results.car_types,errors:errors.array()});
+				});
+			return;
+		}
+		// remove old image for better storage management
+		Car.findById(req.params.id, "img").exec((err, car)=>{
+			fs.unlink("./public/images/carImages/" + car.img, err => {
+			if (err) {
+				return next(err);
+			}});
+		});
+		Car.findByIdAndUpdate(req.params.id,car,{},(err,thecar) => {
+			if (err) {
+				return next(err);
+			}
+			res.redirect(thecar.dburl);
+		});
+		car.save((err)=> {
+			if (err) {
+				return next(err);
+			}
+			res.redirect(car.url);
+		});
+		// console.log("Success");
+	}
+];

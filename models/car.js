@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const CarSchema = new Schema({
-    name: {type: String,required:true,minLength:1, maxLength:15},
+    name: {type: String,required:true,minLength:1, maxLength:25},
     brand: {type:Schema.Types.ObjectId, ref:'Brand', required:true},
     car_type:{type:Schema.Types.ObjectId, ref:'CarType', required:true},
     description: {type: String, maxLength:175},
