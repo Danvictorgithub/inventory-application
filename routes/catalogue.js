@@ -51,12 +51,14 @@ router.post("/database/car/:id/delete",carController.car_delete_post);
 router.get("/database/car/:id/update",carController.car_update_get);
 router.post("/database/car/:id/update",carController.car_update_post);
 
-router.get("/database/carinstances");
-router.get("/database/carinstance/:id");
+router.get("/database/carinstances",carinstanceController.car_instance_list);
 router.get("/database/carinstance/create",carinstanceController.car_instance_form_create_get);
 router.post("/database/carinstance/create",carinstanceController.car_instance_form_create_post);
-router.get("/database/carinstance/:id/delete");
-router.get("/database/carinstance/:id/update");
+router.get("/database/carinstance/:id",carinstanceController.car_instance_details);
+router.get("/database/carinstance/:id/delete",carinstanceController.car_instance_delete_get);
+router.post("/database/carinstance/:id/delete",carinstanceController.car_instance_delete_post);
+router.get("/database/carinstance/:id/update",carinstanceController.car_instance_update_get);
+router.post("/database/carinstance/:id/update",carinstanceController.car_instance_update_post);
 
 router.get("/database/cartypes");
 router.get('/database/cartype/create',cartypeController.car_type_create_get);

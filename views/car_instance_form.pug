@@ -8,12 +8,18 @@ block container
 					label(for="car" id="car") Car:
 					select(name="car")
 						for car in cars
-							option(value=car.id) #{car.brand.name} #{car.name}
+							if car.selected == true
+								option(value=car.id selected) #{car.brand.name} #{car.name}
+							else
+								option(value=car.id) #{car.brand.name} #{car.name}
 				div.autoPadding
 					label(for="status" id="status") Status:
 					select(name="status")
 						for status in ["Available","Out of Stock","Available-SecondHand"]
-							option(value=status)=status
+								if (carinstance != null && status == carinstance.status)
+									option(value=status selected)=status
+								else 
+									option(value=status)=status
 				div.autoPadding
 					button(type="submit") Submit
 	if errors

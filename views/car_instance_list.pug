@@ -1,0 +1,14 @@
+extends cataloguelayout
+
+block container
+	div.databaselist
+		div.wrapper
+			div.autoPadding
+				h1 Car Instance Database
+				button.createButton
+					a(href="./carinstance/create") Create Car Instance
+			ul.lists.autoPadding
+				for car_instance in car_instances
+					li.autoPadding
+						a(href=`${car_instance.url}`) #{car_instance.car.brand.name} #{car_instance.car.name}  -  #{car_instance.status}
+

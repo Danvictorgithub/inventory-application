@@ -1,0 +1,11 @@
+extends cataloguelayout
+
+block container
+	div.detail_gen
+		div.wrapper
+			div.autoPadding.content
+				h1 Car Instance of #{carinstance.car.brand.name} #{carinstance.car.name}
+				h2 Status = #{carinstance.status}
+				form(action="" method="post")
+						input(type="hidden" name="carinstanceid" value=carinstance._id)
+						button.formDelete(type="submit") Delete
