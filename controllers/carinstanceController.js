@@ -59,7 +59,7 @@ exports.car_instance_list = (req,res,next) => {
 		if (err) {
 			return next(err);
 		}
-		console.log(results);
+		// console.log(results);
 		res.render("car_instance_list",{
 			car_instances:results,
 		});

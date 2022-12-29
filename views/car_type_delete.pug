@@ -1,0 +1,17 @@
+extends cataloguelayout
+
+block container
+	div.detail_gen
+		div.wrapper
+			div.autoPadding.content
+				h1=car_type.name
+					if (cars.length > 0)
+						p Delete the Following cars to be able to delete this Car Instance:
+						ul
+							for car in cars
+								li 
+									a(href=car.dburl)=car.name
+					else
+						form(action="" method="post")
+							input(name ="cartypeid" type="hidden" value=car_type._id)
+							button(type="submit").formDelete Delete

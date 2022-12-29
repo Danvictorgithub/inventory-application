@@ -6,6 +6,6 @@ const CarTypeSchema = new Schema({
 });
 
 CarTypeSchema.virtual("url").get(function(){
-	return `/catalogue/shop/cartype/${this._id}`;
+	return `/catalogue/database/cartype/${this._id}`;
 });
 module.exports = mongoose.model("CarType",CarTypeSchema);

@@ -1,0 +1,15 @@
+extends cataloguelayout
+
+block container
+	div.detail_gen
+		div.wrapper
+			div.autoPadding.content
+				h1=car_type.name
+					p Cars associated with this car type:
+					ul
+						for car in cars
+							li 
+								a(href=car.dburl)=car.name
+				a(href=`${car_type.url}/delete`) Delete
+				br
+				a(href=`${car_type.url}/update`) Update

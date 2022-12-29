@@ -107,10 +107,6 @@ exports.brand_delete_post = (req,res,next) => {
 			if (err) {
 				return next(err);
 			}
-			if (results.brand == null) {
-				const err = new Error(`Brand ID: ${req.params.id} not found`);
-				return next(err);
-			}
 			if (results.cars.length > 0) {
 				res.render("book_delete",{brand:results.brand,cars:results.cars});
 				return;

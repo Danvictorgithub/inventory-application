@@ -13,8 +13,8 @@ block container
 									a(href=car.dburl)=car.name
 				else
 					form(action="" method="post")
-						input(type="hidden" value=brand._id)
-						button(type="submit") Delete
+						input(type="hidden" name="brandid" value=brand._id)
+						button(type="submit").formDelete Delete
 			//- form(action="" method="post")
 			//- 	input(type="none" value=brand._id)
 			//- 	button(type="submit") Update

@@ -1,0 +1,14 @@
+extends cataloguelayout
+
+block container
+	div.databaselist
+		div.wrapper
+			div.autoPadding
+				h1 Car Type Database
+				button.createButton
+					a(href="./cartype/create") Create Car Type
+			ul.lists.autoPadding
+				for car_type in car_types
+					li.autoPadding
+						a(href=`${car_type.url}`) #{car_type.name}
+

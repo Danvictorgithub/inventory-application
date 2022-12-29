@@ -60,10 +60,12 @@ router.post("/database/carinstance/:id/delete",carinstanceController.car_instanc
 router.get("/database/carinstance/:id/update",carinstanceController.car_instance_update_get);
 router.post("/database/carinstance/:id/update",carinstanceController.car_instance_update_post);
 
-router.get("/database/cartypes");
+router.get("/database/cartypes",cartypeController.car_type_list);
 router.get('/database/cartype/create',cartypeController.car_type_create_get);
 router.post('/database/cartype/create',cartypeController.car_type_create_post);
-router.post("/database/cartypes/:id",cartypeController.car_type_create_post);
-router.get("/database/cartypes/:id/delete");
-router.get("/database/cartypes/:id/update");
+router.get("/database/cartype/:id",cartypeController.car_type_details);
+router.get("/database/cartype/:id/delete",cartypeController.car_type_delete_get);
+router.post("/database/cartype/:id/delete",cartypeController.car_type_delete_post);
+router.get("/database/cartype/:id/update",cartypeController.car_type_update_get);
+router.post("/database/cartype/:id/update",cartypeController.car_type_update_post);
 module.exports = router;

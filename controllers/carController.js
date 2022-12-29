@@ -98,7 +98,7 @@ exports.car_catalog_info = (req,res,next) => {
 			},
 		},
 		(err,results)=>{
-			console.log(results.cars);
+			// console.log(results.cars);
 			if (err) {
 				return next(err);
 			}
