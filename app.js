@@ -5,15 +5,14 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const helmet = require("helmet");
 const compression = require("compression");
-
+require("dotenv").config();
 // const bodyParser = require("body-parser");
 
 const mongoose = require('mongoose');
-const mongoDB = "mongodb+srv://dan:dan123@cluster0.qwgwoxz.mongodb.net/inventory-application?retryWrites=true&w=majority";
+const mongoDB = process.env.MONGODB_URI;
 mongoose.connect(mongoDB, { useNewUrlParser:true, useUnifiedTopology:true});
 const db = mongoose.connection;
 db.on('error',console.error.bind(console, 'MongoDB Connection error:'));
-
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
